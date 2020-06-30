@@ -22,7 +22,7 @@ def import_list(file_path: str) -> list:
     Returns:
         list: The list stored in the csv file
     """
-    with open(file_path, newline=''):
-        reader = csv.reader()
+    with open(file_path, newline='') as f:
+        reader = csv.reader(f)
         stored_list = list(reader)[0]
     return stored_list
