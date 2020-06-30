@@ -3,11 +3,12 @@ import numpy as np
 from scipy import stats
 
 
-def remove_outlier(df: pd.DataFrame, strategy: str = 'IQR') -> pd.DataFrame:
+def remove_outliers(df: pd.DataFrame, numerical_variables: list, strategy: str = 'IQR') -> pd.DataFrame:
     """Remove rows of the input dataframe having at least one variable with outlier
 
     Args:
         df (pd.DataFrame): Input dataframe
+        numerical_variables (list): list of the numerical variables names in the input dataframe
         strategy (str, optional): IQR or z-score outlier strategy. Defaults to 'IQR'.
 
     Returns:
@@ -15,6 +16,8 @@ def remove_outlier(df: pd.DataFrame, strategy: str = 'IQR') -> pd.DataFrame:
     """
     assert strategy in [
         'IQR', 'z-score'], "You must choose IQR or z-score strategy"
+
+    df = df[numerical_variables]
 
     if strategy == "IQR":
         Q1 = df.quantile(0.25)
