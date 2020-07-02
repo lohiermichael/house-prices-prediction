@@ -1,3 +1,5 @@
+from typing import Tuple
+
 import pandas as pd
 import numpy as np
 from scipy import stats
@@ -57,4 +59,52 @@ def replace_rare_labels(df: pd.DataFrame, categorical_variables: list, percentag
                            'Rare',
                            df[var])
 
+    return df
+
+
+def summarize_common_variables(df1: pd.DataFrame, df2: pd.DataFrame) -> Tuple[list]:
+    """Check the difference in variables between two dataframes
+
+    Args:
+        df1, df2 (pd.DataFrame): The two dataframes to compare
+
+    Returns:
+        tuple(list): A tuple of 3 lists: 
+            - the variables names in common
+            - the variables in df1 but not in df2
+            - the variables in df2 but not in df1
+    """
+
+    common_vars = [var for var in df1.columns if var in df2.columns]
+    vars_df1_not_df2 = [var for var in df1.columns if var not in df2.columns]
+    vars_df2_not_df1 = [var for var in df2.columns if var not in df1.columns]
+
+    # Summary
+    print(f'In common: {len(common_vars)}')
+    print(common_vars)
+    print('\n')
+    print(f'In df1 and not in df2: {len(vars_df1_not_df2)}')
+    print(vars_df1_not_df2)
+    print('\n')
+    print(f'In df2 and not in df1: {len(vars_df2_not_df1)}')
+    print(vars_df2_not_df1)
+
+    return common_vars, vars_df1_not_df2, vars_df2_not_df1
+
+
+def complete_one_hot_variables(df: pd.DataFrame, var_names: list) -> pd.DataFrame:
+    """Complete missing variables in a dataframe by columns of 0
+
+    Args:
+        df (pd.DataFrame): Input dataframe
+        var_names (list): List of missing variables names 
+
+    Returns:
+        pd.DataFrame: Dataframe with new variables
+    """
+
+    df = df.copy()
+    for var in var_names:
+        # Create a column of 0s
+        df[var] = 0
     return df
