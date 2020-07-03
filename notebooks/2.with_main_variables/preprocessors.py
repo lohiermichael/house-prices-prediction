@@ -38,7 +38,8 @@ class LogTransformer(BaseEstimator, TransformerMixin):
     def transform(self, X):
         X = X.copy()
         for feature in self.variables:
-            X[feature] = np.log(X[feature])
+            if feature in X.columns:
+                X[feature] = np.log(X[feature])
         return X
 
 
