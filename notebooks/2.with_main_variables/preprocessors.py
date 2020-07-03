@@ -1,21 +1,11 @@
 import numpy as np
+import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 
 import feature_engineering
 
-"""
-Pipeline steps:
-1. Numerical: Remove outliers IQR
-2. Numerical: Log transform variables
-3. Categorical: Add 'Rare' label
-4. Categorical: One-hot-encode (no need from sklearn)
-5. Categorical: Add additional columns
-6. Feature Scaling
 
-"""
-
-
-class OutliersRemoval(BaseEstimator, TransformerMixin):
+class OutliersRemover(BaseEstimator, TransformerMixin):
 
     def __init__(self, variables=None):
         if not isinstance(variables, list):
@@ -69,4 +59,23 @@ class RareLabelCategoricalEncode(BaseEstimator, TransformerMixin):
         X = feature_engineering.replace_rare_labels(df=X,
                                                     categorical_variables=self.variables,
                                                     percentage_rare=self.percentage_rare)
+        return X
+
+
+class OneHotEncoder(BaseEstimator, TransformerMixin):
+
+    def __init__(self, variables):
+        if not isinstance(variables, list):
+            self.variables = [variables]
+        else:
+            self.variables = variables
+
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X):
+        X = X.copy()
+        X = pd.get_dummies(data=X,
+                           columns=self.variables,
+                           drop_first=True)
         return X
