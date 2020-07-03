@@ -62,7 +62,7 @@ def replace_rare_labels(df: pd.DataFrame, categorical_variables: list, percentag
     return df
 
 
-def summarize_common_variables(df1: pd.DataFrame, df2: pd.DataFrame) -> Tuple[list]:
+def summarize_common_variables(df1: pd.DataFrame, df2: pd.DataFrame, print_of: bool = True) -> Tuple[list]:
     """Check the difference in variables between two dataframes
 
     Args:
@@ -79,15 +79,16 @@ def summarize_common_variables(df1: pd.DataFrame, df2: pd.DataFrame) -> Tuple[li
     vars_df1_not_df2 = [var for var in df1.columns if var not in df2.columns]
     vars_df2_not_df1 = [var for var in df2.columns if var not in df1.columns]
 
-    # Summary
-    print(f'In common: {len(common_vars)}')
-    print(common_vars)
-    print('\n')
-    print(f'In df1 and not in df2: {len(vars_df1_not_df2)}')
-    print(vars_df1_not_df2)
-    print('\n')
-    print(f'In df2 and not in df1: {len(vars_df2_not_df1)}')
-    print(vars_df2_not_df1)
+    if print_of:
+        # Summary
+        print(f'In common: {len(common_vars)}')
+        print(common_vars)
+        print('\n')
+        print(f'In df1 and not in df2: {len(vars_df1_not_df2)}')
+        print(vars_df1_not_df2)
+        print('\n')
+        print(f'In df2 and not in df1: {len(vars_df2_not_df1)}')
+        print(vars_df2_not_df1)
 
     return common_vars, vars_df1_not_df2, vars_df2_not_df1
 
