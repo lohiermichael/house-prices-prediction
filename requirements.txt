@@ -4,3 +4,4 @@ numpy==1.18.1
 seaborn==0.10.1
 # Visualize missing data
 missingno
+kaggle==1.5.6
