@@ -5,7 +5,7 @@ mkdir datasets/outputs
 
 # Import data from Kaggle
 kaggle competitions download -c house-prices-advanced-regression-techniques -p datasets/inputs
-Unzip the imported folder
+# Unzip the imported folder
 unzip 'datasets/inputs/house-prices-advanced-regression-techniques.zip' -d 'datasets/inputs'
-Remove the zipped file
+# Remove the zipped file
 rm 'datasets/inputs/house-prices-advanced-regression-techniques.zip'
