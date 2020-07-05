@@ -28,5 +28,5 @@ Kaggle competition on predicting sales prices
 
 7. Download the datasets from Kaggle. Make sure that you have a Kaggle account and that everything is setup. [Reference](https://github.com/Kaggle/kaggle-api)
 
-```.scripts/manage_datasets```
+```.scripts/download_data.sh```
 
