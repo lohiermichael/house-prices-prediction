@@ -16,11 +16,17 @@ Kaggle competition on predicting sales prices
 
 ```conda create --name house-pred```
 
-4. Install the requirements
+4. Activate the virtual environment
+```conda activate house-pred```
+
+5. Install pip in the virtual environment (no need if you don't use conda)
+```conda install pip```
+
+6. Install the requirements
 
 ```pip install -r requirements.txt```
 
-5. Download the datasets from Kaggle
+7. Download the datasets from Kaggle. Make sure that you have a Kaggle account and that everything is setup. [Reference](https://github.com/Kaggle/kaggle-api)
 
 ```.scripts/manage_datasets```
 
